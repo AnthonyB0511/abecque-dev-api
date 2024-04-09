@@ -8,7 +8,7 @@ router.get("/", (_, res) => {
 
 router.post('/send', (req, res) => {
     const { name, firstname, email, subject, message } = req.body;
-    console.log("send Ok");
+    console.log(name);
     // Configurer le transporteur Nodemailer
     try {
         const transporter = nodemailer.createTransport({
