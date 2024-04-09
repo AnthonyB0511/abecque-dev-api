@@ -6,7 +6,7 @@ router.get("/", (_, res) => {
 });
 
 
-router.post('/send', (req, res) => {
+router.post('/sendMessage', (req, res) => {
     const { name, firstname, email, subject, message } = req.body;
     console.log(name);
     // Configurer le transporteur Nodemailer
@@ -39,8 +39,5 @@ router.post('/send', (req, res) => {
     } catch (error) {
         console.error(error);
     }
-
-
-
 });
 module.exports = router;
