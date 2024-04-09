@@ -8,7 +8,7 @@ const routes = require("./routes");
 
 
 app.use((req, res, next) => {
-    const allowedOrigin = "https://abecque-dev.vercel.app/";
+    const allowedOrigin = "https://abecque-dev.vercel.app";
     const origin = req.headers.origin;
     if (allowedOrigin.includes(origin)) {
         res.header('Access-Control-Allow-Origin', origin);
