@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+router.get("/", (_, res) => {
+    res.send(JSON.stringify("CONTACT OK"));
+});
 
 
 router.post('/send', (req, res) => {
