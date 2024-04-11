@@ -5,25 +5,22 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: "becque.anthony@gmail.com",
-        pass: "bogl evbq rqgu rdvx",
+        user: process.env.MAIL,
+        pass: process.env.PASSWORDNODEMAILER,
     },
 });
 
 router.use(express.json());
 router.post('/send', (req, res) => {
     const { name, firstname, email, subject, message } = req.body;
-    // Configurer le transporteur Nodemailer
     try {
-        // Options du message
         const mailOptions = {
             from: email,
-            to: 'becque.anthony@gmail.com', // Adresse e-mail de destination
+            to: process.env.MAIL,
             subject: subject,
             text: `Nom: ${name}\nPrénom: ${firstname}\nEmail: ${email}\nMessage: ${message}`,
         };
 
-        // Envoyer l'email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error(error);
@@ -36,7 +33,6 @@ router.post('/send', (req, res) => {
         console.error(error);
     }
 
-    // Options du message
 
 });
 module.exports = router;
