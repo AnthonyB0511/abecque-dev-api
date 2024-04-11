@@ -1,28 +1,24 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const nodemailer = require("nodemailer");
-require("dotenv").config();
-router.get("/", (_, res) => {
-    res.send(JSON.stringify("CONTACT OK"));
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: "becque.anthony@gmail.com",
+        pass: "bogl evbq rqgu rdvx",
+    },
 });
 
-
-router.post('/sendMessage', (req, res) => {
+router.use(express.json());
+router.post('/send', (req, res) => {
     const { name, firstname, email, subject, message } = req.body;
-    console.log(name);
     // Configurer le transporteur Nodemailer
     try {
-        const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: process.env.MAIL,
-                pass: process.env.PASSWORDNODEMAILER,
-            },
-        });
-
         // Options du message
         const mailOptions = {
             from: email,
-            to: process.env.MAIL, // Adresse e-mail de destination
+            to: 'becque.anthony@gmail.com', // Adresse e-mail de destination
             subject: subject,
             text: `Nom: ${name}\nPrénom: ${firstname}\nEmail: ${email}\nMessage: ${message}`,
         };
@@ -39,5 +35,8 @@ router.post('/sendMessage', (req, res) => {
     } catch (error) {
         console.error(error);
     }
+
+    // Options du message
+
 });
 module.exports = router;
